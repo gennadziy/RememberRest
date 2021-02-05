@@ -52,4 +52,16 @@ public class Controller {
     public Use addUser(@Valid @RequestBody Use use){
         return userDao.save(use);
     }
+
+    @PutMapping("/api/{id}")
+    public ResponseEntity<Use> updateUser(@PathVariable(value = "id") Long id,
+                                                   @Valid @RequestBody Use useDetails) throws ResourceNotFoundException {
+        Use user = userDao.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
+
+        user.setId(useDetails.getId());
+        user.setName(useDetails.getName());
+        final Use updatedUser = userDao.save(user);
+        return ResponseEntity.ok(updatedUser);
+    }
 }

@@ -9,5 +9,6 @@ public interface UserService {
     List<Use> allUsers();
 
     Optional<Use> getUser(Long id);
+
     void delete();
 }
