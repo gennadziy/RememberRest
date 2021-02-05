@@ -37,25 +37,34 @@ public class Controller {
             throw new ResourceNotFoundException("Not found id :: " + id);
     }
 
+//    @DeleteMapping(value = "api/{id}")
+//    public Map<String, Boolean> deletePlanet(@PathVariable(value = "id") Long id)
+//            throws ResourceNotFoundException {
+//        Use use = userService.getUser(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
+//        userDao.deleteById(id);
+//        Map<String, Boolean> response = new HashMap<>();
+//        response.put("deleted", Boolean.TRUE);
+//        return response;
+//    }
+
     @DeleteMapping(value = "api/{id}")
-    public Map<String, Boolean> deletePlanet(@PathVariable(value = "id") Long id)
+    public String deletePlanet(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
         Use use = userService.getUser(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
         userDao.deleteById(id);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        return "Deleted  " +id;
     }
 
     @PostMapping(value = "api")
-    public Use addUser(@Valid @RequestBody Use use){
+    public Use addUser(@Valid @RequestBody Use use) {
         return userDao.save(use);
     }
 
     @PutMapping("/api/{id}")
     public ResponseEntity<Use> updateUser(@PathVariable(value = "id") Long id,
-                                                   @Valid @RequestBody Use useDetails) throws ResourceNotFoundException {
+                                          @Valid @RequestBody Use useDetails) throws ResourceNotFoundException {
         Use user = userDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
 
