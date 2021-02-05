@@ -26,6 +26,6 @@ public class USerServiceImpl implements UserService {
 
     @Override
     public void delete() {
-        
+
     }
 }

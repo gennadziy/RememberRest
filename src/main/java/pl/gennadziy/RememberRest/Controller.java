@@ -2,15 +2,13 @@ package pl.gennadziy.RememberRest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.gennadziy.RememberRest.DAO.UserDao;
 import pl.gennadziy.RememberRest.exception.ResourceNotFoundException;
 import pl.gennadziy.RememberRest.model.Use;
 import pl.gennadziy.RememberRest.service.UserService;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +19,9 @@ public class Controller {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserDao userDao;
 
     @GetMapping(value = "api/all")
     public ResponseEntity<List<Use>> getAll() {
@@ -41,9 +42,14 @@ public class Controller {
             throws ResourceNotFoundException {
         Use use = userService.getUser(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
-//        use
+        userDao.deleteById(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @PostMapping(value = "api")
+    public Use addUser(@Valid @RequestBody Use use){
+        return userDao.save(use);
     }
 }

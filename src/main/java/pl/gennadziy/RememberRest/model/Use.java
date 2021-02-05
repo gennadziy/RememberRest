@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -18,8 +19,10 @@ public class Use {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+//    @NotNull( message = "Name may not be empty")
     private String name;
 
+//    @NotEmpty(message = "Name may not be empty")
     @DateTimeFormat(pattern = "dd MMMM yyyy")
     private Date date;
 
