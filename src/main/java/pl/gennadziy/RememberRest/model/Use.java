@@ -2,11 +2,7 @@ package pl.gennadziy.RememberRest.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -23,6 +19,7 @@ public class Use {
     private String name;
 
 //    @NotEmpty(message = "Name may not be empty")
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd MMMM yyyy")
     private Date date;
 

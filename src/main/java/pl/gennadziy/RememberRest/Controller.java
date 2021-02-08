@@ -9,9 +9,7 @@ import pl.gennadziy.RememberRest.model.Use;
 import pl.gennadziy.RememberRest.service.UserService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
