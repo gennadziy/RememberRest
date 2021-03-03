@@ -1,5 +1,6 @@
 package pl.gennadziy.RememberRest;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@Slf4j
 public class Controller {
 
     @Autowired
@@ -52,6 +54,7 @@ public class Controller {
         Use use = userService.getUser(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
         userDao.deleteById(id);
+        log.info("УДАЛИЛ БЛЯ ВСЕ");
         return "Deleted  " +id;
     }
 

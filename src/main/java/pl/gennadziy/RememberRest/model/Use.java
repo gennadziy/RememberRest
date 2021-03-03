@@ -3,7 +3,6 @@ package pl.gennadziy.RememberRest.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -20,7 +19,7 @@ public class Use {
 
 //    @NotEmpty(message = "Name may not be empty")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd MMMM yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @Override
